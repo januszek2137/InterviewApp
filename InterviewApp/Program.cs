@@ -1,4 +1,5 @@
 using InterviewApp.Data;
+using InterviewApp.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddHttpClient<PhonesService>(client => {
+    client.BaseAddress = new Uri("https://localhost:7247");
+});
 
 var app = builder.Build();
 
